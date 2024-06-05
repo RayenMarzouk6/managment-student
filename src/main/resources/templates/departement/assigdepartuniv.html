@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+  <title>Ajouter Université</title>
+</head>
+
+<body>
+<div class="container">
+  <h3>Gestion Des Universitées</h3>
+  <hr>
+
+  <p class="h4 mb-4">Assigner univ depart</p>
+  <form action="/departement/assignDepartementToUniversite" method="post">
+    <div>
+      <label for="universite">Sélectionnez une université :</label>
+      <select id="universite" name="idUniversite">
+        <option th:each="universite : ${luniversite}" th:value="${universite.getIdUniv()}" th:text="${universite.getNomUniv()}"></option>
+      </select>
+    </div>
+    <div>
+      <label for="departement">Sélectionnez un département :</label>
+      <select id="departement" name="idDepartement">
+        <option th:each="departement : ${ldepartement}" th:value="${departement.getIdDepart()}" th:text="${departement.getNomDepart()}"></option>
+      </select>
+    </div>
+    <button type="submit">Assigner</button>
+  </form>
+
+
+</div>
+</body>
+</html>

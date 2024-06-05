@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Liste Départements</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>Liste Département</h3>
+	<hr>
+
+	<!-- Add button -->
+	<a th:href="@{/index}"
+	   class="btn btn-primary btn-sm mb-3">
+		Home
+	</a>
+	<a th:href="@{/departement/add}"
+		class="btn btn-primary btn-sm mb-3">
+		Ajouter Département
+	</a>
+
+
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>ID</th>
+				<th>Nom Departement</th>
+				<th>univ</th>
+				<th>Action</th>
+						</tr>
+		</thead>
+
+		<tbody>
+		<tr th:each="departementDetails : ${departementDetailsList}"> <!-- Utilisation de 'departementDetailsList' au lieu de 'listDepartements' -->
+			<td th:text="${departementDetails.depart.getIdDepart()}" /> <!-- Utilisation de departementDetails pour accéder aux détails du département -->
+			<td th:text="${departementDetails.depart.getNomDepart()}" /> <!-- Utilisation de departementDetails pour accéder aux détails du département -->
+			<td th:text="${departementDetails.univ != null ? departementDetails.univ.getNomUniv() : 'N/A'}" /><!-- Utilisation de departementDetails pour accéder aux détails de l'université associée -->
+			<td>
+					<!--  Update button/link -->
+					<a th:href="@{/departement/update(departementId=${departementDetails.depart.getIdDepart()})}"
+						class="btn btn-info btn-sm">
+						Update
+					</a>
+					<!-- Delete button/link -->
+					<a th:href="@{/departement/delete(departementId=${departementDetails.depart.getIdDepart()})}"
+						class="btn btn-danger btn-sm"
+						onClick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">
+						Delete
+					</a>
+					<a th:href="@{/departement/univdepart(departementId=${departementDetails.depart.getIdDepart()})}"
+					   class="btn btn-danger btn-sm">
+
+						Details
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>
+
+</body>
+</html>
+
+
+
